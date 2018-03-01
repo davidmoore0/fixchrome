@@ -3,7 +3,9 @@
 
 
 ###Quit Chrome:###
-(for X in `ps acx | grep -i Google\ Chrome | awk {'print $1'}`; do kill $X; done)
+(for PID in `ps acx | grep -i Google\ Chrome | awk {'print $1'}`; do kill $PID; done) ;
+ps -ef | grep 'chrome' | grep -v grep | awk '{print $2}' | xargs -r kill -9 ;
+pkill -a -i -f chrom ;
 
 ###Purge most Chrome settings###
 
@@ -14,7 +16,8 @@ sudo rm -r /Applications/Google\ Chrome.app/
 
 ##Remove or backup Chrome Profile and major information (this is key to this process)
 #rm -r ~/Library/Application\ Support/Google/Chrome/
-mv ~/Library/Application\ Support/Google/Chrome ~/Library/Application\ Support/Google/Chrome.bak
+mv ~/Library/Application\ Support/Google/Chrome ~/Library/Application\ Support/Google/Chrome.bak.`date +"%Y-%m_%d-%H:%M:%S:%3N"`
+
 #TODO: Have it check to see if backup already exists, if one does, create a numbered backup (e.g. .bak1, .bak2, etc)
 
 ###Reinstall Chrome###
