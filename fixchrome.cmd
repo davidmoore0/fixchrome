@@ -94,8 +94,49 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     printf "\n" &&
     ####TODO: Figure out which version (Stable, Beta, Dev, Chromium) user is using to guide process####
     sudo apt purge google-chrome* -y &&
-    for i in  ~/.config/google-chrome-unstable ~/.config/google-chrome-beta ~/.config/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no profile backups were made"; done
-
+    sleep .5 &&
+    printf "\n" &&
+    ###Backup Chrome Profile(s) and configuration files###
+    printf "And next we'll back up the configuration info from the Profile(s) you had logged into Chrome." &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    ###Switch Username if User did something like "sudo su" before running the script
+    if [[ $USER == root ]] ; then USER=$SUDO_USER ; else USER=$USER ; fi &&
+    DIRECT=$(getent passwd $USER | cut -d: -f6) &&
+    for i in $DIRECT/.config/google-chrome-unstable $DIRECT/.config/google-chrome-beta $DIRECT/.config/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no profile backups were made"; done
+    ####TODO: Add options to let users select and undo the config move. I.e. rm -r $DIRECT/.config/google-chrome && mv -v $DIRECT/.config/google-chrome.bak.* $DIRECT/.config/google-chrome
+    ###Reinstall Chrome###
+    printf "Now, let's reinstall Chrome. This won't take long." &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sudo apt update && sudo apt autoremove && sudo apt autoclean && sudo apt install --install-suggests -y google-chrome-stable
+    ###Reopen Chrome###
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    printf "That's pretty much it. Log into your account and all will be well." &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    sleep .5 &&
+    printf "\n" &&
+    (google-chrome-stable & disown) > /dev/null 2>&1 ;
 ##OSDETECT:Mac##
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     sleep .5 &&
@@ -204,7 +245,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     printf "\n" &&
     ###Switch Username if User did something like "sudo su" before running the script
     if [[ $USER == root ]] ; then USER=$SUDO_USER ; else USER=$USER ; fi &&
-    mv /Users/$USER/Library/Application\ Support/Google/Chrome /Users/$USER/Library/Application\ Support/Google/Chrome.bak.`date +"%d-%B-%Y@%H:%M:%S"` &&
+    mv -v /Users/$USER/Library/Application\ Support/Google/Chrome /Users/$USER/Library/Application\ Support/Google/Chrome.bak.`date +"%d-%B-%Y@%H:%M:%S"` &&
     ###Reinstall Chrome###
     printf "Now, let's reinstall Chrome. This won't take long." &&
     sleep .5 &&
