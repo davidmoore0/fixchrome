@@ -93,6 +93,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sleep .5 &&
     printf "\n"
     ####TODO: Figure out which version (Stable, Beta, Dev, Chromium) user is using to guide process####
+    #/home/$USER/.config/google-chrome/default
 
 ##OSDETECT:Mac##
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -191,7 +192,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     sleep .5 &&
     printf "\n" &&
     ###Backup Chrome Profile(s) and configuration files###
-    printf "And next we'll back the configuration information up from the Profile(s) you had logged into Chrome." &&
+    printf "And next we'll back up the configuration info from the Profile(s) you had logged into Chrome." &&
     sleep .5 &&
     printf "\n" &&
     sleep .5 &&
@@ -202,7 +203,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     printf "\n" &&
     ###Switch Username if User did something like "sudo su" before running the script
     if [[ $USER == root ]] ; then USER=$SUDO_USER ; else USER=$USER ; fi &&
-    mv /Users/$USER/Library/Application\ Support/Google/Chrome /Users/$USER/Library/Application\ Support/Google/Chrome.bak.`date +"%Y-%m_%d-%H.%M.%S"` &&
+    mv /Users/$USER/Library/Application\ Support/Google/Chrome /Users/$USER/Library/Application\ Support/Google/Chrome.bak.`date +"%d-%B-%Y@%H:%M:%S"` &&
     ###Reinstall Chrome###
     printf "Now, let's reinstall Chrome. This won't take long." &&
     sleep .5 &&
