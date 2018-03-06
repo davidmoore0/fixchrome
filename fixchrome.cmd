@@ -109,7 +109,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     ###Switch Username if User did something like "sudo su" before running the script
     if [[ $USER == root ]] ; then USER=$SUDO_USER ; else USER=$USER ; fi &&
     DIRECT=$(getent passwd $USER | cut -d: -f6) &&
-    for i in $DIRECT/.config/google-chrome-unstable $DIRECT/.config/google-chrome-beta $DIRECT/.config/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no profile backups were made"; done
+    for i in $DIRECT/.config/google-chrome-unstable $DIRECT/.config/google-chrome-beta $DIRECT/.config/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no profile backups were made"; done &&
+    for i in $DIRECT/.cache/google-chrome-unstable $DIRECT/.cache/google-chrome-beta $DIRECT/.cache/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no cache backups were made"; done &&
     ####TODO: Add options to let users select and undo the config move. I.e. rm -r $DIRECT/.config/google-chrome && mv -v $DIRECT/.config/google-chrome.bak.* $DIRECT/.config/google-chrome
     ###Reinstall Chrome###
     printf "Now, let's reinstall Chrome. This won't take long." &&
