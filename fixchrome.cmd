@@ -74,7 +74,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sleep .5 &&
     printf "\n" &&
     sleep .5 &&
-    pkill -i -f chrom 2>/dev/null ;
+    pkill -f chrom 2>/dev/null ;
     printf "Chrome is dead to me..." &&
     sleep .5 &&
     printf "\n" &&
