@@ -46,8 +46,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sleep .5 &&
     printf "\n" &&
     sleep .5 &&
-    PID=$( ps -ef | grep -i Google\ Chrome | grep -v grep | (awk '{print $2}' || echo : )) && kill -9 $PID 2>/dev/null && wait $PID 2>/dev/null ;
-    #ps -ef | grep -i chrom | grep -v grep | awk '{print $2}' | xargs -r kill -9 &&
+    #PID=$( ps -ef | grep -i Google\ Chrome | grep -v grep | (awk '{print $2}' || echo : )) && kill -9 $PID 2>/dev/null && wait $PID 2>/dev/null ;
+    ps -ef | grep -i chrom | grep -v grep | awk '{print $2}' | xargs -r kill -9 &&
     printf "...but let's just make sure it actually died." &&
     sleep .5 &&
     printf "\n" &&
@@ -91,9 +91,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sleep .5 &&
     printf "\n" &&
     sleep .5 &&
-    printf "\n"
+    printf "\n" &&
     ####TODO: Figure out which version (Stable, Beta, Dev, Chromium) user is using to guide process####
-    #/home/$USER/.config/google-chrome/default
+    sudo apt purge google-chrome* -y &&
+    for i in  ~/.config/google-chrome-unstable ~/.config/google-chrome-beta ~/.config/google-chrome ; do test -e "$i" && mv -v $i $i.bak.`date +"%d-%B-%Y@%H:%M:%S"` || echo "$i does not exist so no profile backups were made"; done
 
 ##OSDETECT:Mac##
 elif [[ "$OSTYPE" == "darwin"* ]]; then
